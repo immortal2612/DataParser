@@ -32,4 +32,30 @@ public class utils {
 
         return data;
     }
+
+    public static ArrayList<Education2016> parse2016Education(String fileToString){
+        String[] StringData = fileToString.split("\n");
+
+        ArrayList<Education2016> data = new ArrayList<>();
+
+        for(int i = 1; i < StringData.length; i++){
+            Education2016 a = new Education2016(StringData[i]);
+            data.add(a);
+        }
+
+        return data;
+    }
+
+    public static ArrayList<Employment2016> parse2016Employment(String fileToString){
+        String[] StringData = fileToString.split("\n");
+
+        ArrayList<Employment2016> data = new ArrayList<>();
+
+        for(int i = 1; i < StringData.length; i++){
+            Employment2016 a = new Employment2016(StringData[i]);
+            data.add(a);
+        }
+
+        return data;
+    }
 }
