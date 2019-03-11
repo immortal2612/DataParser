@@ -20,5 +20,16 @@ public class utils {
         return output.toString();
     }
 
+    public static ArrayList<ElectionResult> parse2016PresidentialResults(String fileToString){
+        String[] StringData = fileToString.split("\n");
 
+        ArrayList<ElectionResult> data = new ArrayList<>();
+
+        for(int i = 1; i < StringData.length; i++){
+            ElectionResult a = new ElectionResult(StringData[i]);
+            data.add(a);
+        }
+
+        return data;
+    }
 }
