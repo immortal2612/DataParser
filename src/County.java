@@ -5,9 +5,12 @@ public class County {
     private Education2016 educ2016;
     private Employment2016 employ2016;
 
-    public County(String n, int f, String s){
+    public County(String s, int f, Education2016 a, ElectionResult b, Employment2016 c){
         FIPS = f;
         state = s;
+        educ2016 = a;
+        vote2016 = b;
+        employ2016 = c;
     }
 
     public int getFIPS() {

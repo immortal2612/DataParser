@@ -19,12 +19,8 @@ public class ElectionResult {
 
         for(int i = 0; i < data.length; i++){
             String c = data[i];
-            if(c.substring(0,1).equals("\"") && c.substring(c.length()-1).equals("\"")){
-                c = removeQuotationMarks(c);
-            } else if (c.substring(0,1).equals("\"")){
-                c = removeStartQuotation(c);
-            } else if(c.substring(c.length()-1).equals("\"")){
-                c = removeEndQuotation(c);
+            if(c.contains("\"") || c.contains(" ")){
+                cleanString(c);
             }
         }
 
@@ -53,7 +49,7 @@ public class ElectionResult {
        setVotes_gop(data[1]);
        setTotal_votes(data[2]);
        setFIPS(Integer.parseInt(data[10]));
-       setState(data[8]);
+       setState(data[7]);
     }
 
     public void setVotes_dem(String votes_dem) {
@@ -80,64 +76,12 @@ public class ElectionResult {
         return total_votes;
     }
 
-    public static String removeQuotationMarks(String var){
-        String[] chars = new String[var.length()];
-
-        for(int i = 0; i < chars.length; i++){
-            chars[i] = var.substring(i, i+1);
-        }
-
-        String newVar = "";
-
-        for(int i = 1; i < chars.length - 1; i++){
-            newVar += chars[i];
-        }
-
-
-        if(newVar.substring(0,1).equals("\"") && newVar.substring(newVar.length()-1).equals("\"")){
-            return removeQuotationMarks(newVar);
-        } else if(newVar.substring(0,1).equals("\"")){
-            return removeStartQuotation(newVar);
-        } else if(newVar.substring(newVar.length()-1).equals("\"")){
-            return removeEndQuotation(newVar);
-        } else{
-            return newVar;
-        }
-    }
-    private static String removeStartQuotation(String newVar) {
-        String newestVar = "";
-
-        for(int i = 1; i < newVar.length(); i++){
-            newestVar += newVar.substring(i, i+1);
-        }
-
-        if(newestVar.substring(0,1).equals("\"")){
-            return removeStartQuotation(newestVar);
-        } else {
-            return newestVar;
-        }
-    }
-
-    private static String removeEndQuotation(String newVar){
-        String newestVar = "";
-
-        for(int i = 0; i < newVar.length() - 1; i++){
-            newestVar += newVar.substring(i, i+1);
-        }
-
-        if(newestVar.substring(newestVar.length()-1).equals("\"")){
-            return removeEndQuotation(newestVar);
-        } else{
-            return newestVar;
-        }
-    }
-
-    private static String removeSpaces(String var){
+    private static String cleanString(String var){
         String[] chars = new String[var.length()];
         ArrayList<Integer> spaces = new ArrayList<>();
         for(int i = 0; i < chars.length; i++){
             chars[i] = var.substring(i, i+1);
-            if(chars[i].equals(" ")){
+            if(chars[i].equals(" ") || chars[i].equals("\"")){
                 spaces.add(i);
             }
         }
