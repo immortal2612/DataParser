@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ElectionResult {
     private int votes_dem, votes_gop, total_votes, diff, fips;
     private double per_dem, per_gop, per_point_diff;
@@ -175,5 +177,28 @@ public class ElectionResult {
         } else{
             return newestVar;
         }
+    }
+
+    private static String removeSpaces(String var){
+        String[] chars = new String[var.length()];
+        ArrayList<Integer> spaces = new ArrayList<>();
+        for(int i = 0; i < chars.length; i++){
+            chars[i] = var.substring(i, i+1);
+            if(chars[i].equals(" ")){
+                spaces.add(i);
+            }
+        }
+
+        for(int i = 0; i < spaces.size(); i++){
+            chars[spaces.get(i)] = "";
+        }
+
+        String newvar = "";
+
+        for(int i = 0; i < chars.length; i++){
+            newvar += chars[i];
+        }
+
+        return newvar;
     }
 }
