@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class ElectionResult {
-    private int votes_dem, votes_gop, total_votes;
+    private int votes_dem, votes_gop, total_votes, FIPS;
+    private String State;
 
     public ElectionResult(String a){
         String[] data = loadDatatoArray(a);
@@ -31,11 +32,28 @@ public class ElectionResult {
     }
 
 
+    public int getFIPS() {
+        return FIPS;
+    }
+
+    public void setFIPS(int FIPS) {
+        this.FIPS = FIPS;
+    }
+
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
 
     public void loadDataToFields(String[] data){
        setVotes_dem(data[0]);
        setVotes_gop(data[1]);
        setTotal_votes(data[2]);
+       setFIPS(Integer.parseInt(data[10]));
+       setState(data[8]);
     }
 
     public void setVotes_dem(String votes_dem) {

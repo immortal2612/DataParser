@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Employment2016 {
     private int FIPS;
+    private String State;
     private int totalLaborForce;
     private int employedLabor;
     private int unemployedLabor;
@@ -15,10 +16,19 @@ public class Employment2016 {
 
     private void loadDatatoFields(String[] data) {
         setFIPS(Integer.parseInt(data[0]));
+        setState(data[1]);
         setTotalLaborForce(Integer.parseInt(data[42]));
         setEmployedLabor(Integer.parseInt(data[43]));
         setUnemployedLabor(Integer.parseInt(data[44]));
         setPerUnemployed(Double.parseDouble(data[45]));
+    }
+
+    public String getState(){
+        return State;
+    }
+
+    public void setState(String s){
+        this.State = s;
     }
     public int getFIPS() {
         return FIPS;

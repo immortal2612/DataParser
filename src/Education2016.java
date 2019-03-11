@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class Education2016 {
     private static int FIPS;
+    private static String State;
+
     private static double noHighSchool;
     private static double onlyHighSchool;
     private static double someCollege;
@@ -14,6 +16,7 @@ public class Education2016 {
 
     private static void loadDataToFields(String[] data){
         setFIPS(Integer.parseInt(data[0]));
+        setState(data[1]);
         setNoHighSchool(Double.parseDouble(data[43]));
         setOnlyHighSchool(Double.parseDouble(data[44]));
         setSomeCollege(Double.parseDouble(data[45]));
@@ -57,6 +60,13 @@ public class Education2016 {
 
     public static void setBachelorOrMore(double bOrMore) {
         bachelorOrMore = bOrMore;
+    }
+    public static String getState() {
+        return State;
+    }
+
+    public static void setState(String state) {
+        State = state;
     }
 
     private static String cleanString(String var){
