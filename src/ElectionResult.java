@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 
 public class ElectionResult {
-    private int votes_dem, votes_gop, total_votes, diff, fips;
-    private double per_dem, per_gop, per_point_diff;
-    private String state_abbr, county_name;
+    private int votes_dem, votes_gop, total_votes;
 
     public ElectionResult(String a){
         String[] data = loadDatatoArray(a);
@@ -38,13 +36,6 @@ public class ElectionResult {
        setVotes_dem(data[0]);
        setVotes_gop(data[1]);
        setTotal_votes(data[2]);
-       setPer_dem(data[3]);
-       setPer_gop(data[4]);
-       setDiff(data[5]);
-       setPer_point_diff(data[6]);
-       setState_abbr(data[7]);
-       setCounty_name(data[8]);
-       setFips(data[9]);
     }
 
     public void setVotes_dem(String votes_dem) {
@@ -59,34 +50,6 @@ public class ElectionResult {
         this.total_votes = (int)Double.parseDouble(total_votes);
     }
 
-    public void setDiff(String diff) {
-        this.diff = Integer.parseInt(diff);
-    }
-
-    public void setFips(String fips) {
-        this.fips = Integer.parseInt(fips);
-    }
-
-    public void setPer_dem(String per_dem) {
-        this.per_dem = Double.parseDouble(per_dem);
-    }
-
-    public void setPer_gop(String per_gop) {
-        this.per_gop = Double.parseDouble(per_gop);
-    }
-
-    public void setPer_point_diff(String per_point_diff) {
-        this.per_point_diff = Double.parseDouble(per_point_diff);
-    }
-
-    public void setState_abbr(String state_abbr) {
-        this.state_abbr = state_abbr;
-    }
-
-    public void setCounty_name(String county_name) {
-        this.county_name = county_name;
-    }
-
     public int getVotes_dem() {
         return votes_dem;
     }
@@ -97,34 +60,6 @@ public class ElectionResult {
 
     public int getTotal_votes() {
         return total_votes;
-    }
-
-    public int getDiff() {
-        return diff;
-    }
-
-    public int getFips() {
-        return fips;
-    }
-
-    public double getPer_dem() {
-        return per_dem;
-    }
-
-    public double getPer_gop() {
-        return per_gop;
-    }
-
-    public double getPer_point_diff() {
-        return per_point_diff;
-    }
-
-    public String getState_abbr() {
-        return state_abbr;
-    }
-
-    public String getCounty_name() {
-        return county_name;
     }
 
     public static String removeQuotationMarks(String var){
