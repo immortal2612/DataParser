@@ -7,11 +7,16 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args){
-        String file = utils.readFileAsString("data/2016_Presidential_Results.csv");
-        ArrayList<ElectionResult> data = utils.parse2016PresidentialResults(file);
-        System.out.println("votes dem " + data.get(50).getVotes_dem() + ". votes gop " + data.get(50).getVotes_gop() + ". total votes " +data.get(50).getTotal_votes());
-        System.out.println("votes dem " + data.get(10).getVotes_dem() + ". votes gop " + data.get(10).getVotes_gop() + ". total votes " +data.get(10).getTotal_votes());
+        String election = utils.readFileAsString("data/2016_Presidential_Results.csv");
+        String education = utils.readFileAsString("data/Education.csv");
+        String employment = utils.readFileAsString("data/Unemployment.csv");
 
-        //System.out.println(utils.readFileAsString("data/2016_Presidential_Results.csv"));
+        ArrayList<ElectionResult> electionResults = utils.parse2016PresidentialResults(election);
+        ArrayList<Education2016> education2016 = utils.parse2016Education(education);
+        ArrayList<Employment2016> employment2016 = utils.parse2016Employment(employment);
+
+        System.out.println("votes dem: " + electionResults.get(10).getVotes_dem() + ". votes gop: " + electionResults.get(10).getVotes_gop() + ". total votes: " +electionResults.get(10).getTotal_votes());
+        System.out.println("noHS: " + education2016.get(10).getNoHighSchool() + ". onlyHS: " + education2016.get(10).getOnlyHighSchool() + ". someCollege: " + education2016.get(10).getSomeCollege() + ". bOrMore: " + education2016.get(10).getBachelorOrMore());
+        System.out.println("totalLaborForce: " + employment2016.get(10).getTotalLaborForce() + ". EmployedLabor: " + employment2016.get(10).getEmployedLabor() + ". UnemployedLabor: " + employment2016.get(10).getUnemployedLabor() + ". percentUnemployed: " + employment2016.get(10).getPerUnemployed());
     }
 }

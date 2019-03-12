@@ -17,11 +17,25 @@ public class Education2016 {
     private static void loadDataToFields(String[] data){
         setFIPS(Integer.parseInt(data[0]));
         setState(data[1]);
-        setNoHighSchool(Double.parseDouble(data[43]));
-        setOnlyHighSchool(Double.parseDouble(data[44]));
-        setSomeCollege(Double.parseDouble(data[45]));
-        setBachelorOrMore(Double.parseDouble(data[46]));
+        boolean full = checkIfDataIsEmpty(data);
+        if(full == true){
+            setNoHighSchool(Double.parseDouble(data[data.length-4]));
+            setOnlyHighSchool(Double.parseDouble(data[data.length-3]));
+            setSomeCollege(Double.parseDouble(data[data.length-2]));
+            setBachelorOrMore(Double.parseDouble(data[data.length-1]));
+        }
     }
+
+    private static boolean checkIfDataIsEmpty(String[] data) {
+        for(int i = 0; i < data.length; i++){
+            if(data[i].equals("")){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public int getFIPS() {
         return FIPS;
     }
@@ -92,12 +106,7 @@ public class Education2016 {
         return newvar;
     }
     private static String[] loadDatatoArray(String a){
-        String[] temp = a.split(",");
-
-        String[] data = new String[temp.length - 1];
-        for(int i = 0; i < data.length; i++){
-            data[i] = temp[i+1];
-        }
+        String[] data = a.split(",");
 
         for(int i = 0; i < data.length; i++){
             String c = data[i];

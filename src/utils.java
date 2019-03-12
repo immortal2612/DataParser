@@ -25,7 +25,7 @@ public class utils {
 
         ArrayList<ElectionResult> data = new ArrayList<>();
 
-        for(int i = 1; i < StringData.length; i++){
+        for(int i = 29; i < StringData.length; i++){
             ElectionResult a = new ElectionResult(StringData[i]);
             data.add(a);
         }
@@ -38,11 +38,13 @@ public class utils {
 
         ArrayList<Education2016> data = new ArrayList<>();
 
-        for(int i = 1; i < StringData.length; i++){
+        for(int i = 23; i < StringData.length; i++){
             Education2016 a = new Education2016(StringData[i]);
             data.add(a);
         }
-
+        /*for(int i = 23; i < StringData.length; i++){
+            System.out.println(StringData[i]);
+        }*/
         return data;
     }
 
@@ -51,7 +53,7 @@ public class utils {
 
         ArrayList<Employment2016> data = new ArrayList<>();
 
-        for(int i = 1; i < StringData.length; i++){
+        for(int i = 19; i < StringData.length; i++){
             Employment2016 a = new Employment2016(StringData[i]);
             data.add(a);
         }
