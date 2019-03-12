@@ -12,10 +12,13 @@ public class ElectionResult {
     private static String[] loadDatatoArray(String a){
         String[] temp = a.split(",");
 
-        String[] data = new String[temp.length - 1];
-        for(int i = 0; i < data.length; i++){
+
+        String[] data = new String[5];
+        for(int i = 0; i < data.length - 2; i++){
             data[i] = temp[i+1];
         }
+        data[3] = temp[temp.length - 3];
+        data[4] = temp[temp.length - 1];
 
         for(int i = 0; i < data.length; i++){
             String c = data[i];
@@ -48,8 +51,8 @@ public class ElectionResult {
        setVotes_dem(data[0]);
        setVotes_gop(data[1]);
        setTotal_votes(data[2]);
-       setFIPS(Integer.parseInt(data[10]));
-       setState(data[7]);
+       setState(data[3]);
+       setFIPS(Integer.parseInt(data[4]));
     }
 
     public void setVotes_dem(String votes_dem) {
