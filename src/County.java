@@ -1,11 +1,11 @@
 public class County {
-    private int FIPS;
+    private String FIPS;
     private String state;
     private ElectionResult vote2016;
     private Education2016 educ2016;
     private Employment2016 employ2016;
 
-    public County(String s, int f, Education2016 a, ElectionResult b, Employment2016 c){
+    public County(String s, String f, Education2016 a, ElectionResult b, Employment2016 c){
         FIPS = f;
         state = s;
         educ2016 = a;
@@ -13,11 +13,11 @@ public class County {
         employ2016 = c;
     }
 
-    public int getFIPS() {
+    public String getFIPS() {
         return FIPS;
     }
 
-    public void setFIPS(int FIPS) {
+    public void setFIPS(String FIPS) {
         this.FIPS = FIPS;
     }
 

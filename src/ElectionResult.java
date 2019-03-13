@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class ElectionResult {
-    private int votes_dem, votes_gop, total_votes, FIPS;
-    private String State;
+    private int votes_dem, votes_gop, total_votes;
+    private String State, FIPS;
 
     public ElectionResult(String a){
         String[] data = loadDatatoArray(a);
@@ -10,32 +10,48 @@ public class ElectionResult {
     }
 
     private static String[] loadDatatoArray(String a){
-        String[] temp = a.split(",");
-
-
-        String[] data = new String[5];
-        for(int i = 0; i < data.length - 2; i++){
-            data[i] = temp[i+1];
+        boolean startQuote = false;
+        boolean endQuote = false;
+        int startQuoteIndex = 0;
+        String cleanA = "";
+        for(int i = 0; i < a.length(); i++){
+            if (a.substring(i, i + 1).equals("\"") && startQuote == true) {
+                cleanA += removeComma(a.substring(startQuoteIndex,i));
+            } else if(a.substring(i, i+1).equals("\"") && startQuote == false){
+                startQuote = true;
+                startQuoteIndex = i;
+            } else{
+                cleanA += a.substring(i, i+1);
+            }
         }
-        data[3] = temp[temp.length - 3];
-        data[4] = temp[temp.length - 1];
 
-        for(int i = 0; i < data.length; i++){
-            String c = data[i];
+
+        String[] temp = cleanA.split(",");
+
+        for(int i = 0; i < temp.length; i++){
+            String c = temp[i];
             if(c.contains("\"") || c.contains(" ")){
                 cleanString(c);
             }
         }
 
-        return data;
+        return temp;
+    }
+
+    public void loadDataToFields(String[] data){
+        setVotes_dem(data[0]);
+        setVotes_gop(data[1]);
+        setTotal_votes(data[2]);
+        setState(data[3]);
+        setFIPS(data[4]);
     }
 
 
-    public int getFIPS() {
+    public String getFIPS() {
         return FIPS;
     }
 
-    public void setFIPS(int FIPS) {
+    public void setFIPS(String FIPS) {
         this.FIPS = FIPS;
     }
 
@@ -45,14 +61,6 @@ public class ElectionResult {
 
     public void setState(String state) {
         State = state;
-    }
-
-    public void loadDataToFields(String[] data){
-       setVotes_dem(data[0]);
-       setVotes_gop(data[1]);
-       setTotal_votes(data[2]);
-       setState(data[3]);
-       setFIPS(Integer.parseInt(data[4]));
     }
 
     public void setVotes_dem(String votes_dem) {
@@ -100,5 +108,22 @@ public class ElectionResult {
         }
 
         return newvar;
+    }
+    private static String removeComma(String a){
+        String[] chars = new String[a.length()];
+        for(int i = 0; i < chars.length; i++){
+            if(a.substring(i, i+1).equals(",")){
+                chars[i] = "";
+            }else{
+                chars[i] = a.substring(i,i+1);
+            }
+        }
+
+        String returnVal = "";
+        for(int i = 0; i < chars.length; i++){
+            returnVal += chars[i];
+        }
+
+        return returnVal;
     }
 }

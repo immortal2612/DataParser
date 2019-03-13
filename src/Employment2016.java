@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Employment2016 {
-    private int FIPS;
+    private String FIPS;
     private String State;
     private int totalLaborForce;
     private int employedLabor;
@@ -13,9 +13,41 @@ public class Employment2016 {
         loadDatatoFields(data);
     }
 
+    private static String[] loadDatatoArray(String a){
+        boolean startQuote = false;
+        boolean endQuote = false;
+        int startQuoteIndex = 0;
+        String cleanA = "";
+        for(int i = 0; i < a.length(); i++){
+            if (a.substring(i, i + 1).equals("\"") && startQuote == true) {
+                cleanA += removeComma(a.substring(startQuoteIndex,i));
+                startQuote = false;
+                startQuoteIndex = 0;
+            } else if(a.substring(i, i+1).equals("\"") && startQuote == false){
+                startQuote = true;
+                startQuoteIndex = i;
+            }
+
+            if(startQuote == false && endQuote == false){
+                cleanA += a.substring(i,i+1);
+            }
+        }
+
+
+        String[] temp = cleanA.split(",");
+
+        for(int i = 0; i < temp.length; i++){
+            String c = temp[i];
+            if(c.contains("\"") || c.contains(" ")){
+                temp[i] = cleanString(c);
+            }
+        }
+
+        return temp;
+    }
 
     private void loadDatatoFields(String[] data) {
-        setFIPS(Integer.parseInt(data[0]));
+        setFIPS(data[0]);
         setState(data[1]);
         setTotalLaborForce(Integer.parseInt(data[42]));
         setEmployedLabor(Integer.parseInt(data[43]));
@@ -30,11 +62,11 @@ public class Employment2016 {
     public void setState(String s){
         this.State = s;
     }
-    public int getFIPS() {
+    public String getFIPS() {
         return FIPS;
     }
 
-    public void setFIPS(int FIPS) {
+    public void setFIPS(String FIPS) {
         this.FIPS = FIPS;
     }
 
@@ -70,27 +102,6 @@ public class Employment2016 {
         this.perUnemployed = perUnemployed;
     }
 
-
-
-
-    private static String[] loadDatatoArray(String a){
-        String[] temp = a.split(",");
-
-        String[] data = new String[temp.length - 1];
-        for(int i = 0; i < data.length; i++){
-            data[i] = temp[i+1];
-        }
-
-        for(int i = 0; i < data.length; i++){
-            String c = data[i];
-            if(c.contains("\"") || c.contains(" ")){
-                data[i] = cleanString(c);
-            }
-        }
-
-        return data;
-    }
-
     private static String cleanString(String var){
         String[] chars = new String[var.length()];
         ArrayList<Integer> spaces = new ArrayList<>();
@@ -112,6 +123,24 @@ public class Employment2016 {
         }
 
         return newvar;
+    }
+
+    private static String removeComma(String a){
+        String[] chars = new String[a.length()];
+        for(int i = 0; i < chars.length; i++){
+            if(a.substring(i, i+1).equals(",")){
+                chars[i] = "";
+            }else{
+                chars[i] = a.substring(i,i+1);
+            }
+        }
+
+        String returnVal = "";
+        for(int i = 0; i < chars.length; i++){
+            returnVal += chars[i];
+        }
+
+        return returnVal;
     }
 
 }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class State {
     private static String name;
     private static ArrayList<County> counties;
-    private static ArrayList<Integer> countyFIPS;
+    private static ArrayList<String> countyFIPS;
 
     public State(String n, ArrayList<Education2016> a, ArrayList<ElectionResult> b, ArrayList<Employment2016> c){
         name = n;
@@ -52,7 +52,7 @@ public class State {
     }
 
     private static void createFipsList(ArrayList<Education2016> a, ArrayList<ElectionResult> b, ArrayList<Employment2016> c) {
-        ArrayList<Integer> testFips = new ArrayList<>();
+        ArrayList<String> testFips = new ArrayList<>();
         for(int i = 0; i < a.size(); i++){
             if(!testFips.contains(a.get(i).getFIPS())){
                 testFips.add(a.get(i).getFIPS());

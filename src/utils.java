@@ -38,7 +38,7 @@ public class utils {
 
         ArrayList<Education2016> data = new ArrayList<>();
 
-        for(int i = 23; i < StringData.length; i++){
+        for(int i = 23; i < StringData.length - 11; i++){
             Education2016 a = new Education2016(StringData[i]);
             data.add(a);
         }
@@ -60,4 +60,5 @@ public class utils {
 
         return data;
     }
+
 }
