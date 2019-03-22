@@ -4,10 +4,14 @@ public class Education2016 {
     private static String FIPS;
     private static String State;
 
-    private static double noHighSchool;
-    private static double onlyHighSchool;
-    private static double someCollege;
-    private static double bachelorOrMore;
+    private static double PernoHighSchool;
+    private static double PeronlyHighSchool;
+    private static double PersomeCollege;
+    private static double PerbachelorOrMore;
+    private static int NumNoHighSchool;
+    private static int NumOnlyHighSchool;
+    private static int NumSomeCollege;
+    private static int NumBachelorOrMore;
 
     public Education2016(String file){
         String[] data = loadDatatoArray(file);
@@ -48,10 +52,14 @@ public class Education2016 {
         setState(data[1]);
         boolean full = checkIfDataIsEmpty(data);
         if(full == true){
-            setNoHighSchool(Double.parseDouble(data[data.length-4]));
-            setOnlyHighSchool(Double.parseDouble(data[data.length-3]));
-            setSomeCollege(Double.parseDouble(data[data.length-2]));
-            setBachelorOrMore(Double.parseDouble(data[data.length-1]));
+            setPerNoHighSchool(Double.parseDouble(data[data.length-4]));
+            setPerOnlyHighSchool(Double.parseDouble(data[data.length-3]));
+            setPerSomeCollege(Double.parseDouble(data[data.length-2]));
+            setPerBachelorOrMore(Double.parseDouble(data[data.length-1]));
+            setNumNoHighSchool(Integer.parseInt(data[data.length-8]));
+            setNumOnlyHighSchool(Integer.parseInt(data[data.length-7]));
+            setNumSomeCollege(Integer.parseInt(data[data.length-6]));
+            setNumBachelorOrMore(Integer.parseInt(data[data.length - 5]));
         }
     }
 
@@ -73,37 +81,76 @@ public class Education2016 {
         FIPS = fips;
     }
 
-    public double getNoHighSchool() {
-        return noHighSchool;
+    public static int getNumNoHighSchool() {
+        return NumNoHighSchool;
     }
 
-    public static void setNoHighSchool(double noHS) {
-        noHighSchool = noHS;
+    public static void setNumNoHighSchool(int numNoHighSchool) {
+        NumNoHighSchool = numNoHighSchool;
     }
 
-    public double getOnlyHighSchool() {
-        return onlyHighSchool;
+    public static int getNumOnlyHighSchool() {
+        return NumOnlyHighSchool;
     }
 
-    public static void setOnlyHighSchool(double onlyHS) {
-        onlyHighSchool = onlyHS;
+    public static void setNumOnlyHighSchool(int numOnlyHighSchool) {
+        NumOnlyHighSchool = numOnlyHighSchool;
     }
 
-    public double getSomeCollege() {
-        return someCollege;
+    public static int getNumSomeCollege() {
+        return NumSomeCollege;
     }
 
-    public static void setSomeCollege(double someC) {
-        someCollege = someC;
+    public static void setNumSomeCollege(int numSomeCollege) {
+        NumSomeCollege = numSomeCollege;
     }
 
-    public double getBachelorOrMore() {
-        return bachelorOrMore;
+    public static int getNumBachelorOrMore() {
+        return NumBachelorOrMore;
     }
 
-    public static void setBachelorOrMore(double bOrMore) {
-        bachelorOrMore = bOrMore;
+    public static void setNumBachelorOrMore(int numBachelorOrMore) {
+        NumBachelorOrMore = numBachelorOrMore;
     }
+
+    public double getPernoHighSchool() {
+        return PernoHighSchool;
+    }
+
+    public static void setPerNoHighSchool(double PnoHS) {
+        PernoHighSchool = PnoHS;
+    }
+
+    public double getPerOnlyHighSchool() {
+        return PeronlyHighSchool;
+    }
+
+    public static void setPerOnlyHighSchool(double PonlyHS) {
+        PeronlyHighSchool = PonlyHS;
+    }
+
+    public double getPerSomeCollege() {
+        return PersomeCollege;
+    }
+
+    public static void setPerSomeCollege(double PsomeC) {
+        PersomeCollege = PsomeC;
+    }
+
+    public double getPerBachelorOrMore() {
+        return PerbachelorOrMore;
+    }
+
+    public static void setPerBachelorOrMore(double PbOrMore) {
+        PerbachelorOrMore = PbOrMore;
+    }
+
+
+
+
+
+
+
     public static String getState() {
         return State;
     }
