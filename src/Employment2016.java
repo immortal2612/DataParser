@@ -122,7 +122,7 @@ public class Employment2016 {
 
         String finalVal = newvar.trim();
 
-        return newvar;
+        return finalVal;
     }
 
     private static String removeComma(String a){
