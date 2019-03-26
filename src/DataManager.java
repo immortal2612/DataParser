@@ -1,52 +1,60 @@
 import java.util.ArrayList;
 
 public class DataManager {
-    private static ArrayList<State> states;
+    private static ArrayList<County> counties;
+    private ArrayList<Education2016> educationData;
+    private ArrayList<ElectionResult> electionData;
+    private ArrayList<String> countyFips = new ArrayList<>();
 
-    private static String[] stateAbbr = { "AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"};
+    public DataManager(ArrayList<Education2016> a, ArrayList<ElectionResult> b){
+        educationData = a;
+        electionData = b;
 
-    public DataManager(ArrayList<Education2016> a, ArrayList<ElectionResult> b, ArrayList<Employment2016> c){
-        sortDatabyState(a, b, c);
+        createCounties();
     }
 
-    public static void sortDatabyState(ArrayList<Education2016> a, ArrayList<ElectionResult> b, ArrayList<Employment2016> c){
-        for(int i = 0; i < stateAbbr.length; i++){
-            State x = new State(stateAbbr[i], education2016(a, stateAbbr[i]), election2016(b, stateAbbr[i]), employment2016(c, stateAbbr[i]));
-
-            states.add(x);
+    private void createCounties() {
+        for(int i = 0; i < educationData.size(); i++){
+            if(!countyFips.contains(educationData.get(i).getFIPS())){
+                countyFips.add(educationData.get(i).getFIPS());
+                County n = new County(educationData.get(i).getFIPS(), educationData.get(i), electionData.get(i));
+                counties.add(n);
+            }
         }
     }
 
-    public static ArrayList<Education2016> education2016(ArrayList<Education2016> a, String stateabbr){
-        ArrayList<Education2016> stateEducation = new ArrayList<>();
-            for(int j = 0; j < a.size(); j++){
-                if(a.get(j).getState().equals(stateabbr)){
-                    stateEducation.add(a.get(j));
-                }
-            }
+    public void PrintCountyInfo(County a){
+        System.out.println("FIPS: " + a.getFIPS());
 
-        return stateEducation;
+        System.out.println("Education Data");
+        System.out.println("");
+        System.out.println("");
+        printEducationInfo(a);
+
+        System.out.println("Election Data");
+        System.out.println("");
+        System.out.println("");
+        printElectionInfo(a);
     }
 
-    public static ArrayList<ElectionResult> election2016(ArrayList<ElectionResult> a, String stateabbr){
-        ArrayList<ElectionResult> stateElection = new ArrayList<>();
-            for(int j = 0; j < a.size(); j++) {
-                if (a.get(j).getState().equals(stateabbr)) {
-                    stateElection.add(a.get(j));
-                }
-            }
-
-        return stateElection;
+    private void printElectionInfo(County a) {
+        ElectionResult elecTemp = a.getElectionData();
+        System.out.println("");
     }
 
-    public static ArrayList<Employment2016> employment2016(ArrayList<Employment2016> a, String stateabbr){
-        ArrayList<Employment2016> stateEmployment = new ArrayList<>();
-            for(int j = 0; j < a.size(); j++){
-                if(a.get(j).getState().equals(stateabbr)){
-                    stateEmployment.add(a.get(j));
-                }
-            }
-
-        return stateEmployment;
+    private void printEducationInfo(County a){
+        Education2016 eduTemp = a.getEducationData();
+        System.out.println("Percent with No High School: " + eduTemp.getPernoHighSchool() + "\tNumber with No High School: " + eduTemp.getNumNoHighSchool());
+        System.out.println("Percent with Only High School: " + eduTemp.getPerOnlyHighSchool() + "\tNumber with Only High School: " + eduTemp.getNumOnlyHighSchool());
+        System.out.println("Percent with Some College: " + eduTemp.getPerSomeCollege() + "\tNumber with Some College: " + eduTemp.getNumSomeCollege());
+        System.out.println("Percent with Bachelors Degree or More: " + eduTemp.getPerBachelorOrMore() + "\tNumber with Bachelors Degree or More: " + eduTemp.getNumBachelorOrMore());
     }
+
+    public County getCounty(int i){
+        return counties.get(i);
+    }
+
+
+
+
 }
