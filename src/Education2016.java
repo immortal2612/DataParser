@@ -4,10 +4,6 @@ public class Education2016 {
     private static String FIPS;
     private static String State;
 
-    private static double PernoHighSchool;
-    private static double PeronlyHighSchool;
-    private static double PersomeCollege;
-    private static double PerbachelorOrMore;
     private static int NumNoHighSchool;
     private static int NumOnlyHighSchool;
     private static int NumSomeCollege;
@@ -51,13 +47,9 @@ public class Education2016 {
 
     private static void loadDataToFields(String[] data){
         setFIPS(data[0]);
-        setState(data[1]);
+        setState(data[2]);
         boolean full = checkIfDataIsEmpty(data);
         if(full == true){
-            setPerNoHighSchool(Double.parseDouble(data[data.length-4]));
-            setPerOnlyHighSchool(Double.parseDouble(data[data.length-3]));
-            setPerSomeCollege(Double.parseDouble(data[data.length-2]));
-            setPerBachelorOrMore(Double.parseDouble(data[data.length-1]));
             setNumNoHighSchool(Integer.parseInt(data[data.length-8]));
             setNumOnlyHighSchool(Integer.parseInt(data[data.length-7]));
             setNumSomeCollege(Integer.parseInt(data[data.length-6]));
@@ -114,44 +106,6 @@ public class Education2016 {
     public static void setNumBachelorOrMore(int numBachelorOrMore) {
         NumBachelorOrMore = numBachelorOrMore;
     }
-
-    public double getPernoHighSchool() {
-        return PernoHighSchool;
-    }
-
-    public static void setPerNoHighSchool(double PnoHS) {
-        PernoHighSchool = PnoHS;
-    }
-
-    public double getPerOnlyHighSchool() {
-        return PeronlyHighSchool;
-    }
-
-    public static void setPerOnlyHighSchool(double PonlyHS) {
-        PeronlyHighSchool = PonlyHS;
-    }
-
-    public double getPerSomeCollege() {
-        return PersomeCollege;
-    }
-
-    public static void setPerSomeCollege(double PsomeC) {
-        PersomeCollege = PsomeC;
-    }
-
-    public double getPerBachelorOrMore() {
-        return PerbachelorOrMore;
-    }
-
-    public static void setPerBachelorOrMore(double PbOrMore) {
-        PerbachelorOrMore = PbOrMore;
-    }
-
-
-
-
-
-
 
     public static String getState() {
         return State;
