@@ -42,23 +42,65 @@ public class utils {
             Education2016 a = new Education2016(StringData[i]);
             data.add(a);
         }
-        /*for(int i = 23; i < StringData.length; i++){
-            System.out.println(StringData[i]);
-        }*/
+
         return data;
     }
+        public ArrayList<DepressionStats> parse2016DepressionStatistics(String data) {
+            //   Create your return arraylist;
+            ArrayList<DepressionStats> results = new ArrayList<>();
+            //  split input data by \n to create array of rows
+            String[] lines = data.split("\n");
 
-    public static ArrayList<Employment2016> parse2016Employment(String fileToString){
-        String[] StringData = fileToString.split("\n");
+            //   loop over all rows BUT SKIP THE FIRST 25 ROWS (look at the file to see why)
+            for (int a = 25; a < lines.length-1; a++) {
 
-        ArrayList<Employment2016> data = new ArrayList<>();
+                //       for each row {
+                //       split it into individual values and save into the right kinds of variables.
+                lines[a] = cleanLine(lines[a]);
+                String[] lineOfCoordinates = lines[a].split(",");
+                String stateName = "";
+                String over18 = "";
+                int numOver18;
+                stateName += lineOfCoordinates[1];
+                stateName = clean(stateName);
+                over18 += lineOfCoordinates[2];
+                over18 = clean(over18);
+                numOver18 = Integer.parseInt(over18);
 
-        for(int i = 19; i < StringData.length; i++){
-            Employment2016 a = new Employment2016(StringData[i]);
-            data.add(a);
+                DepressionStats newDepStats = new DepressionStats(stateName, numOver18);
+                //     Add it to your list.
+                results.add(newDepStats);
+            }
+
+            return results;
         }
 
-        return data;
-    }
+        private static String cleanLine(String row){
 
+            int firstQuote = row.indexOf("\"");
+            int secondQuote = row.indexOf("\"", firstQuote + 1);
+
+            while (firstQuote != -1 && secondQuote != -1){
+                row = cleanSubstring(row, firstQuote, secondQuote);
+
+                firstQuote = row.indexOf("\"");
+                secondQuote = row.indexOf("\"", firstQuote+1);
+            }
+            return row;
+        }
+
+        private static String cleanSubstring(String row, int firstQuote, int secondQuote) {
+            String before = row.substring(0, firstQuote);
+            String after = row.substring(secondQuote+1);
+
+            String toClean = row.substring(firstQuote+1, secondQuote);
+
+            return before + clean(toClean) + after;
+        }
+
+        private static String clean(String toClean) {
+            toClean = toClean.replaceAll(",", "").trim();
+            toClean = toClean.replaceAll("%", "");
+            return toClean;
+        }
 }
