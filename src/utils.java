@@ -45,7 +45,7 @@ public class utils {
 
         return data;
     }
-        public ArrayList<DepressionStats> parse2016DepressionStatistics(String data) {
+        public static ArrayList<DepressionStats> parse2016DepressionStatistics(String data) {
             //   Create your return arraylist;
             ArrayList<DepressionStats> results = new ArrayList<>();
             //  split input data by \n to create array of rows

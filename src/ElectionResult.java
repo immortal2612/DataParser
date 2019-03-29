@@ -16,11 +16,13 @@ public class ElectionResult {
         String cleanA = "";
         for(int i = 0; i < a.length(); i++){
             if (a.substring(i, i + 1).equals("\"") && startQuote == true) {
-                cleanA += removeComma(a.substring(startQuoteIndex,i));
+                cleanA += removeComma(a.substring(startQuoteIndex,i+1));
+                startQuote = false;
+                startQuoteIndex = 0;
             } else if(a.substring(i, i+1).equals("\"") && startQuote == false){
                 startQuote = true;
                 startQuoteIndex = i;
-            } else{
+            } else if(startQuote == false){
                 cleanA += a.substring(i, i+1);
             }
         }
@@ -42,7 +44,7 @@ public class ElectionResult {
         setVotes_dem(data[0]);
         setVotes_gop(data[1]);
         setTotal_votes(data[2]);
-        setFIPS(data[4]);
+        setFIPS(data[data.length-1]);
     }
 
 
@@ -104,7 +106,7 @@ public class ElectionResult {
     private static String removeComma(String a){
         String[] chars = new String[a.length()];
         for(int i = 0; i < chars.length; i++){
-            if(a.substring(i, i+1).equals(",")){
+            if(a.substring(i, i+1).equals(",") || a.substring(i, i+1).equals("\"") || a.substring(i, i+1).equals("\t")){
                 chars[i] = "";
             }else{
                 chars[i] = a.substring(i,i+1);
@@ -116,6 +118,8 @@ public class ElectionResult {
             returnVal += chars[i];
         }
 
-        return returnVal;
+        String finalReturn = returnVal.trim();
+
+        return finalReturn;
     }
 }
