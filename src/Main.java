@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /***
  * by Ayush Nair
@@ -10,7 +11,7 @@ public class Main {
         String EducationFile = utils.readFileAsString("data/Education.csv");
         String ElectionFile = utils.readFileAsString("data/2016_Presidential_Results.csv");
 
-        ArrayList<DepressionStats> depression = utils.parse2016DepressionStatistics(depressionFile);
+        ArrayList<Depression> depression = utils.parse2016DepressionStatistics(depressionFile);
         ArrayList<Education2016> education = utils.parse2016Education(EducationFile);
         ArrayList<ElectionResult> election = utils.parse2016PresidentialResults(ElectionFile);
 

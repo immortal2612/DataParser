@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class utils {
@@ -38,16 +39,16 @@ public class utils {
 
         ArrayList<Education2016> data = new ArrayList<>();
 
-        for(int i = 23; i < StringData.length - 11; i++){
+        for(int i = 7; i < StringData.length - 89; i++){
             Education2016 a = new Education2016(StringData[i]);
             data.add(a);
         }
 
         return data;
     }
-        public static ArrayList<DepressionStats> parse2016DepressionStatistics(String data) {
+        public static ArrayList<Depression> parse2016DepressionStatistics(String data) {
             //   Create your return arraylist;
-            ArrayList<DepressionStats> results = new ArrayList<>();
+            ArrayList<Depression> results = new ArrayList<>();
             //  split input data by \n to create array of rows
             String[] lines = data.split("\n");
 
@@ -67,7 +68,7 @@ public class utils {
                 over18 = clean(over18);
                 numOver18 = Integer.parseInt(over18);
 
-                DepressionStats newDepStats = new DepressionStats(stateName, numOver18);
+                Depression newDepStats = new Depression(stateName, numOver18);
                 //     Add it to your list.
                 results.add(newDepStats);
             }

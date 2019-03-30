@@ -7,13 +7,13 @@ public class State {
     private double perNoHS, perOnlyHS, perSomeCollege, perBachelorOrMore;
     private int EighteenOrOver = 0;
 
-    public State(String n, ArrayList<ElectionResult> a, Education2016 b, DepressionStats c){
+    public State(String n, ArrayList<ElectionResult> a, Education2016 b, Depression c){
         numNoHS = b.getNumNoHighSchool();
         numOnlyHS = b.getNumOnlyHighSchool();
         numSomeCollege = b.getNumSomeCollege();
         numBachelorsOrMore = b.getNumBachelorOrMore();
         name = n;
-        EighteenOrOver = c.getNumOver18AffectedByDepression();
+        EighteenOrOver = c.getOver18Depression();
 
         sumCountyData(a);
         perCountyData();
